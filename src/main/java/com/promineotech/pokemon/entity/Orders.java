@@ -7,8 +7,8 @@ import lombok.Data;
 @Builder
 public class Orders {
   private Long orderId;
-  private Long trainerId;
-  private Long natureId;
+  private Trainers trainerId;
+  private Nature natureId;
   private BigDecimal price;
   //private DateTime
 }
