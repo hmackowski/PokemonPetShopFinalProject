@@ -29,9 +29,12 @@ public class PokemonOrderDao implements IPokemonOrderDao {
 
   @Autowired
   private NamedParameterJdbcTemplate jdbcTemplate;  
-
-  //@Autowired
-  private Orders orders;  
+  
+//@Autowired
+ // PokemonOrder po;
+  
+ //@Autowired
+  private Orders orders;
   
   //@Autowired
   private Pokemon pokemon; 
@@ -266,12 +269,12 @@ public class PokemonOrderDao implements IPokemonOrderDao {
         + "INNER JOIN orders as o "
         + "     ON po.order_id  = o.order_id "
         + "INNER JOIN trainers AS t "
-        + "     ON o.trainer_id = :t.trainer_id "
+        + "     ON o.trainer_id = t.trainer_id "
         + "INNER JOIN nature n "
         + "     ON o.nature_id = n.nature_id "
         + "WHERE o.order_id = :order_id";
     
-
+        
     Map<String, Object> params = new HashMap<>();
     params.put("order_id", pokemonOrderId);
     return jdbcTemplate.query(sql, params, new RowMapper<PokemonOrder>() {
@@ -283,7 +286,7 @@ public class PokemonOrderDao implements IPokemonOrderDao {
             .builder()
             .pokemonOrderId(Long.parseLong(pokemonOrderId))
             .orders(orders)
-            .pokemon(pokemon)
+            //.pokemonOrderId(pokemon)
             .build();
       }});
 
