@@ -59,7 +59,7 @@ public class PokemonOrderService implements IPokemonOrderService {
 
   @Override
   public List<PokemonOrder> pullOrder(String pokemonOrderId) {
-    
+    log.debug("Returning an order where orderID={}", pokemonOrderId);
     return pokemonOrderDao.pullOrder(pokemonOrderId);
   }
 
