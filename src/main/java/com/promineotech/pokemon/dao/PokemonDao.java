@@ -119,8 +119,6 @@ public class PokemonDao implements IPokemonDao {
     params.put("type2", type2);
     params.put("evolution_phase", evolutionPhase);
 
-    // jdbcTemplate2.update("INSERT INTO pokemon (pokedex_number, name, type1, type2,
-    // evolution_phase) VALUES(?, ?, ?, ?, ?)", pokedexNumber, name, type1, type2, evolutionPhase);
     jdbcTemplate.update(sql, params);
 
    // @formatter:off

@@ -3,13 +3,12 @@ package com.promineotech.pokemon.service;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 import com.promineotech.pokemon.dao.IPokemonDao;
 import com.promineotech.pokemon.entity.Nature;
 import com.promineotech.pokemon.entity.Pokemon;
-import lombok.extern.slf4j.Slf4j;
 
-@RestController
+@Service
 public class PokemonService implements IPokemonService {
 
   @Autowired

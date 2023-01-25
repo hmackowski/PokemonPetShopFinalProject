@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 import com.promineotech.pokemon.entity.Nature;
 import com.promineotech.pokemon.entity.Orders;
 import com.promineotech.pokemon.entity.Pokemon;
+import com.promineotech.pokemon.entity.PokemonOrder;
 import com.promineotech.pokemon.entity.Trainers;;
 
 
@@ -18,5 +19,7 @@ public interface IPokemonOrderDao {
 
   Optional<Nature> fetchNature(String nature);
   
-  Orders saveOrder(Trainers trainer,Pokemon pokemon, Nature natures, BigDecimal price);
+  Orders saveOrder(Trainers trainer,Pokemon pokemon, Nature natures, double price);
+  
+  public List<PokemonOrder> pullOrder(String pokemonOrderId);
 }

@@ -1,9 +1,11 @@
 package com.promineotech.pokemon.controller;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import com.promineotech.pokemon.entity.OrderRequest;
 import com.promineotech.pokemon.entity.Orders;
+import com.promineotech.pokemon.entity.PokemonOrder;
 import com.promineotech.pokemon.service.IPokemonOrderService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -19,6 +21,12 @@ public class PokemonOrderController implements IPokemonOrderController {
     log.info("Order={}", orderRequest);
 
     return pokemonOrderService.createOrder(orderRequest);
+  }
+
+  @Override
+  public List<PokemonOrder> pullOrder(String pokemonOrderId) {
+    
+    return pokemonOrderService.pullOrder(pokemonOrderId);
   }
 }
 

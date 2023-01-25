@@ -24,9 +24,4 @@ public class OrderRequest {
   @Pattern(regexp = "[\\w\\s]*")
   private String pokemon;
   
-  @Positive
-  @Min(1)
-  @Max(25)
-  private int evolutionPhase;
-  
 }

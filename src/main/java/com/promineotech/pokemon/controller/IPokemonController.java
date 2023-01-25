@@ -21,7 +21,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.servers.Server;
 
 @RequestMapping("/pokemon")
-@OpenAPIDefinition(info = @Info(title = "Pokemon Service"),
+@OpenAPIDefinition(info = @Info(title = "Pokemon Pet Shop Api"),
     servers = {@Server(url = "http://localhost:8080", description = "Local Server.")})
 public interface IPokemonController {
 
