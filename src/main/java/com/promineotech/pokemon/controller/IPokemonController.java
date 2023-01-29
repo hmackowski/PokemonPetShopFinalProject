@@ -29,7 +29,7 @@ public interface IPokemonController {
 
     // @formatter:off
     @Operation(
-        summary = "Resturns a list of Pokemon",
+        summary = "",
         description = "Returns a list of Pokemon given a Pokemon ID Number",
         responses = {
             @ApiResponse(

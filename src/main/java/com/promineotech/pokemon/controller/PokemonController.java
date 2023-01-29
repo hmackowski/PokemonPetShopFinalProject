@@ -18,7 +18,7 @@ public class PokemonController implements IPokemonController {
 
 
 
-  @Override //Fetchs a pokemon by pokemonID
+  @Override //Fetches a pokemon by pokemonID
   public List<Pokemon> fetchPokemon(Integer pokemonId) {
     log.debug("Fetching pokemon where pokemonID={}", pokemonId);
     return pokemonService.fetchPokemon(pokemonId);
