@@ -20,7 +20,7 @@ public class TrainerDao implements ITrainerDao {
   @Autowired
   private NamedParameterJdbcTemplate jdbcTemplate;
 
-  @Override
+  @Override  // Fetches all trainers in the trainers table
   public List<Trainers> fetchAllTrainers() {
 
     log.debug("in the dao");
@@ -46,7 +46,7 @@ public class TrainerDao implements ITrainerDao {
     });
   }
 
-  @Override
+  @Override // Adds a new trainer in the trainers table
   public Optional<Trainers> addnewTrainer(String firstName, String lastName, String hometown) {
     String sql = ""
         + "INSERT INTO trainers (first_name, last_name, home_town) "
@@ -67,7 +67,7 @@ public class TrainerDao implements ITrainerDao {
         );
   }
 
-  @Override
+  @Override // Deletes a trainer in the trainers table
   public Optional<Trainers> deleteTrainer(Long trainerId) {
     String sql = ""
         + "DELETE FROM trainers "

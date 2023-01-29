@@ -15,18 +15,18 @@ public class TrainerController implements ITrainerController {
   @Autowired  
   ITrainerService trainerService;
   
-  @Override  
+  @Override   //Fetches all trainers in the trainers table
   public List<Trainers> fetchAllTrainers() {
     log.debug("Returning a list of all Trainers.");
     return trainerService.fetchAllTrainers();
   }
 
-  @Override
+  @Override  // Adds a new trainer to the trainers table
   public Optional<Trainers> addNewTrainer(String firstName, String lastName, String hometown) {
     return trainerService.addNewTrainer(firstName, lastName, hometown);
   }
 
-  @Override
+  @Override  // Deletes a trainer from the trainers table
   public Optional<Trainers> deleteTrainer(Long trainerId) {
     return trainerService.deleteTrainer(trainerId);
   }

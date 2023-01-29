@@ -16,14 +16,14 @@ public class PokemonOrderController implements IPokemonOrderController {
   @Autowired
   IPokemonOrderService pokemonOrderService;
 
-  @Override
+  @Override  //Creates an order using orderRequest fields
   public Orders createOrder(OrderRequest orderRequest) {
     log.info("Order={}", orderRequest);
 
     return pokemonOrderService.createOrder(orderRequest);
   }
 
-  @Override
+  @Override // Returns a list of items on an order using pokemonOrderId
   public List<PokemonOrder> pullOrder(String pokemonOrderId) {
     
     return pokemonOrderService.pullOrder(pokemonOrderId);

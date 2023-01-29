@@ -23,7 +23,7 @@ public class PokemonDao implements IPokemonDao {
   @Autowired
   private NamedParameterJdbcTemplate jdbcTemplate;
 
-  @Override
+  @Override  //Fetches a pokemon by pokemonId
   public List<Pokemon> fetchPokemon(Integer pokemonId) {
     log.info("DAO: PokemonID={}", pokemonId);
 
@@ -56,7 +56,7 @@ public class PokemonDao implements IPokemonDao {
     });
   }
 
-  @Override
+  @Override  // Fetches all natures in the natures table
   public List<Nature> fetchAllNatures() {
 
     // @formatter:off
@@ -80,7 +80,7 @@ public class PokemonDao implements IPokemonDao {
 
   }
 
-  @Override
+  @Override // Fetches all pokemon from the pokemon table
   public List<Pokemon> fetchAllPokemon() {
 
     // @formatter:off
@@ -106,7 +106,7 @@ public class PokemonDao implements IPokemonDao {
     });
   }
 
-  @Override
+  @Override  // Adds a pokemon to to pokemon Table given parameters
   public Optional<Pokemon> addPokemon(int pokedexNumber, String name, String type1, String type2,
       int evolutionPhase) {
     String sql = "" + "INSERT INTO pokemon (pokedex_number, name, type1, type2, evolution_phase) "
@@ -133,7 +133,7 @@ public class PokemonDao implements IPokemonDao {
     // @formatter:on
   }
 
-  @Override
+  @Override  // Updates a pokemon given the pokemonId, and parameters to update
   public Optional<Pokemon> updatePokemon(Long pokemonId, int pokedexNumber, String name,
       String type1, String type2, int evolutionPhase) {
 

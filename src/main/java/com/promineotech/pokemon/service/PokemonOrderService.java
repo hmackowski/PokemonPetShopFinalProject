@@ -21,7 +21,7 @@ public class PokemonOrderService implements IPokemonOrderService {
   @Autowired
   PokemonOrderDao pokemonOrderDao;
 
-  @Override
+  @Override  // Creates order using fields in the orderRequest Class
   public Orders createOrder(OrderRequest orderRequest) {
     double price;
     Trainers trainer = getTrainer(orderRequest);
@@ -36,20 +36,20 @@ public class PokemonOrderService implements IPokemonOrderService {
     return pokemonOrderDao.saveOrder(trainer, pokemon, nature, price);
   }
 
-
+// Fetches nature from the orderRequest field
   protected Nature getNature(OrderRequest orderRequest) {
     return pokemonOrderDao.fetchNature(orderRequest.getNature())
         .orElseThrow(() -> new NoSuchElementException(
             "Nature with ID=" + orderRequest.getNature() + " was not found"));
   }
-
+//Fetches Pokemon from the orderRequest field
   protected Pokemon getPokemon(OrderRequest orderRequest) {
     return pokemonOrderDao.fetchPokemon(orderRequest.getPokemon())
         .orElseThrow(() -> new NoSuchElementException(
             "Pokemon with ID=" + orderRequest.getPokemon() + " was not found"));
   }
 
-
+//Fetches Trainer from the orderRequest field
   protected Trainers getTrainer(OrderRequest orderRequest) {
     return pokemonOrderDao.fetchTrainer(orderRequest.getTrainerId())
         .orElseThrow(() -> new NoSuchElementException(
@@ -57,7 +57,7 @@ public class PokemonOrderService implements IPokemonOrderService {
   }
 
 
-  @Override
+  @Override // Pulls order given pokemonOrderId number
   public List<PokemonOrder> pullOrder(String pokemonOrderId) {
     log.debug("Returning an order where orderID={}", pokemonOrderId);
     return pokemonOrderDao.pullOrder(pokemonOrderId);

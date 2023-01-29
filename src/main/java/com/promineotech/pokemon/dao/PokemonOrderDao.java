@@ -3,6 +3,7 @@ package com.promineotech.pokemon.dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -30,16 +31,9 @@ public class PokemonOrderDao implements IPokemonOrderDao {
   @Autowired
   private NamedParameterJdbcTemplate jdbcTemplate;  
   
-//@Autowired
- // PokemonOrder po;
-  
- //@Autowired
   private Orders orders;
-  
-  //@Autowired
-  private Pokemon pokemon; 
 
-  @Override
+  @Override  //fetches a trainer given the trainerId number
   public Optional<Trainers> fetchTrainer(String trainer) {
     // @formatter:off
     String sql = "" 
@@ -55,7 +49,7 @@ public class PokemonOrderDao implements IPokemonOrderDao {
   }
 
 
-  @Override
+  @Override  //fetches a pokemon given a pokemon Id number
   public Optional<Pokemon> fetchPokemon(String pokemon) {
     // @formatter:off
     String sql = "" 
@@ -71,7 +65,7 @@ public class PokemonOrderDao implements IPokemonOrderDao {
   }
 
 
-  @Override
+  @Override //Fetches a nature given a natureId number
   public Optional<Nature> fetchNature(String nature) {
     // @formatter:off
     String sql = "" 
@@ -87,7 +81,7 @@ public class PokemonOrderDao implements IPokemonOrderDao {
   }
 
 
-  @Override
+  @Override   // Saves an order to ther Orders table
   public Orders saveOrder(Trainers trainer,Pokemon pokemon, Nature natures, double price) {
     SqlParams params = generateInsertSql(trainer, natures, price);
     KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -204,6 +198,7 @@ public class PokemonOrderDao implements IPokemonOrderDao {
     MapSqlParameterSource source = new MapSqlParameterSource();
   }
   
+  //Inser sql for trainer, nature, and price in the orders table
   private SqlParams generateInsertSql(Trainers trainer, Nature nature, double price) {
     // @formatter:off
     String sql = ""
@@ -225,7 +220,7 @@ public class PokemonOrderDao implements IPokemonOrderDao {
     return params;
   }
 
-
+//fetches the evolution phase of the pokemon to determine a price for the pokemon
   public int fetchEvolutionPhase(@NotNull String string) {
     
     // @formatter:off
@@ -273,20 +268,30 @@ public class PokemonOrderDao implements IPokemonOrderDao {
         + "INNER JOIN nature n "
         + "     ON o.nature_id = n.nature_id "
         + "WHERE o.order_id = :order_id";
-    
+    String natureId;
+    List<String> pokemonNames = new LinkedList<>();
+
         
     Map<String, Object> params = new HashMap<>();
     params.put("order_id", pokemonOrderId);
+    //params.put(pokemonOrderId, natureId)
     return jdbcTemplate.query(sql, params, new RowMapper<PokemonOrder>() {
 
       @Override
       public PokemonOrder mapRow(ResultSet rs, int rowNum) throws SQLException {
-        // TODO Auto-generated method stub
+        pokemonNames.add(rs.getString("p.name"));
+        //pokemonNames.add("Char");
+        
         return PokemonOrder
             .builder()
-            .pokemonOrderId(Long.parseLong(pokemonOrderId))
-            .orders(orders)
-            //.pokemonOrderId(pokemon)
+            .pokemonOrderId(pokemonOrderId)
+            .trainerFirstName(rs.getString("t.first_name"))
+            .trainerLastName(rs.getString("t.last_name"))
+            .pokemonName(rs.getString("p.name"))
+            .nature(rs.getString("n.nature_name"))
+            .orderPrice(rs.getString("o.price"))
+            .dateTime(rs.getString("o.order_time"))
+            //.pokemons(pokemonNames)
             .build();
       }});
 
